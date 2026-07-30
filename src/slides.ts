@@ -230,12 +230,13 @@ export const slides: Slide[] = [
   {
     kind: "steps",
     planetId: "greedy",
-    title: "그래서 자리가 계속 바뀌었어요",
+    title: "그래서 해본 일이 계속 늘었어요",
     steps: [
-      { name: "2기 멤버", desc: "스터디, 줍줍" },
-      { name: "3기 스터디 리드", desc: "스터디를 이끌었어요" },
-      { name: "4기 운영진", desc: "동아리 운영을 해요" },
+      { name: "2기 멤버", desc: "스터디하고 줍줍 만들고" },
+      { name: "3기 스터디 리드", desc: "스터디를 이끌고" },
+      { name: "4기 운영진", desc: "동아리를 운영하고" },
     ],
+    note: "일이 늘어난 만큼 만나는 사람도 늘었어요",
   },
   {
     kind: "sky",
