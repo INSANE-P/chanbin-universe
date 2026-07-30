@@ -72,14 +72,41 @@ function Content({ slide }: { slide: Slide }) {
     case "cover":
       return (
         <div className="scene-center">
-          <motion.div className="title-spot" {...fadeUp(0.5)}>
+          {slide.struck && (
+            <motion.div
+              className="struck-wrap"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 0.62, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+            >
+              <span className="struck-title">{slide.struck}</span>
+              <svg
+                className="strike"
+                viewBox="0 0 100 14"
+                preserveAspectRatio="none"
+                aria-hidden
+              >
+                <motion.path
+                  d="M1,9 Q26,4 50,8 T99,6"
+                  fill="none"
+                  stroke="#d1495b"
+                  strokeWidth="2.6"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.45, delay: 1.05, ease: "easeIn" }}
+                />
+              </svg>
+            </motion.div>
+          )}
+          <motion.div className="title-spot" {...fadeUp(1.75)}>
             <h1 className="cover-title">{slide.title}</h1>
           </motion.div>
-          <motion.p className="cover-sub pen" {...fadeUp(1.1)}>
+          <motion.p className="cover-sub pen" {...fadeUp(2.4)}>
             {slide.subtitle}
           </motion.p>
           <div className="moon-scene">
-            <HangingProp spread={340} attach={138} delay={1.3} swayDur={7}>
+            <HangingProp spread={340} attach={138} delay={2.6} swayDur={7}>
               <MoonScene width={430} />
             </HangingProp>
           </div>
@@ -87,7 +114,7 @@ function Content({ slide }: { slide: Slide }) {
             className="cover-plane"
             initial={{ x: -280, y: 70, rotate: -8, opacity: 0 }}
             animate={{ x: 260, y: -50, rotate: 6, opacity: [0, 1, 1, 1] }}
-            transition={{ duration: 5, delay: 2, ease: "easeInOut" }}
+            transition={{ duration: 5, delay: 3.2, ease: "easeInOut" }}
           >
             <PaperGlyph name="plane" size={54} />
           </motion.div>
@@ -266,25 +293,51 @@ function Content({ slide }: { slide: Slide }) {
           <motion.h2 className="slide-title" {...fadeUp(0.5)}>
             {slide.title}
           </motion.h2>
-          <div className="yes-rows">
+          <div className={slide.mode === "ask" ? "yes-rows ask" : "yes-rows"}>
             {slide.items.map((item, i) => (
               <div className="yes-row" key={i}>
                 <motion.div
                   className="paper-card yes-strip"
-                  initial={{ opacity: 0, x: -26 }}
+                  initial={{ opacity: 0, x: slide.mode === "ask" ? 26 : -26 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.55, delay: 0.9 + i * 0.5, ease: "easeOut" }}
                 >
                   {item}
                 </motion.div>
-                <motion.span
-                  className="yes-stamp pen"
-                  initial={{ opacity: 0, scale: 2.4, rotate: -32 }}
-                  animate={{ opacity: 1, scale: 1, rotate: -12 }}
-                  transition={{ duration: 0.28, delay: 1.3 + i * 0.5, ease: "easeIn" }}
-                >
-                  YES!
-                </motion.span>
+                {slide.mode === "ask" ? (
+                  <motion.span
+                    className="ask-mark"
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 16,
+                      delay: 1.2 + i * 0.5,
+                    }}
+                  >
+                    <svg width="42" height="34" viewBox="0 0 42 34" aria-hidden>
+                      <path
+                        d="M6,2 H36 Q40,2 40,6 V20 Q40,24 36,24 H16 L6,33 L9,24 H6 Q2,24 2,20 V6 Q2,2 6,2 Z"
+                        fill="#f2c14e"
+                      />
+                    </svg>
+                    <span className="pen">저</span>
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    className="yes-stamp pen"
+                    initial={{ opacity: 0, scale: 2.4, rotate: -32 }}
+                    animate={{ opacity: 1, scale: 1, rotate: -12 }}
+                    transition={{
+                      duration: 0.28,
+                      delay: 1.3 + i * 0.5,
+                      ease: "easeIn",
+                    }}
+                  >
+                    네!
+                  </motion.span>
+                )}
               </div>
             ))}
           </div>
@@ -357,34 +410,6 @@ function Content({ slide }: { slide: Slide }) {
           ) : (
             <NameSky groups={slide.groups} />
           )}
-        </div>
-      );
-
-    case "people":
-      return (
-        <div className="slide-frame">
-          <motion.h2 className="sky-title" {...fadeUp(0.4)}>
-            {slide.title}
-          </motion.h2>
-          <div className="people-grid">
-            {slide.people.map((per, i) => (
-              <HangingProp
-                key={per.name}
-                threads={1}
-                delay={0.8 + i * 0.3}
-                swayDur={5.5 + i * 0.8}
-              >
-                <div
-                  className="paper-card person-card"
-                  style={{ transform: `rotate(${i % 2 ? 1 : -1.2}deg)` }}
-                >
-                  <ClayFace color={per.color} size={64} />
-                  <strong className="person-name">{per.name}</strong>
-                  <span className="person-desc pen">{per.desc}</span>
-                </div>
-              </HangingProp>
-            ))}
-          </div>
         </div>
       );
 

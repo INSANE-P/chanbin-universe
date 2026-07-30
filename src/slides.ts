@@ -1,20 +1,19 @@
 // 발표 내용. 화면에는 뼈대만 두고, 세부 이야기는 말로 풀어요.
+// 큰 줄기는 "제안을 받던 사람에서 제안하는 사람으로" 예요.
 
-export type PersonCard = { color: string; name: string; desc: string };
 export type Photo = { src: string; caption: string };
 
 export type Slide =
-  | { kind: "cover"; title: string; subtitle: string }
+  | { kind: "cover"; title: string; subtitle: string; struck?: string }
   | { kind: "planet"; planetId: string; title: string; caption?: string }
   | { kind: "content"; planetId: string; title: string; bullets: string[]; glyph?: string; photo?: Photo }
   | { kind: "stat"; planetId: string; kicker?: string; big: string; lines: string[] }
   | { kind: "tiles"; planetId: string; title: string; tiles: { big: string; small: string }[]; notes?: string[] }
   | { kind: "person"; planetId: string; name: string; tag: string; color: string; traits: string[] }
-  | { kind: "yeslist"; planetId: string; title: string; items: string[] }
+  | { kind: "yeslist"; planetId: string; title: string; items: string[]; mode?: "ask" }
   | { kind: "steps"; planetId: string; title: string; steps: { name: string; desc: string }[]; note?: string }
   | { kind: "sky"; planetId: string; title: string; groups: { label: string; names: string[] }[]; photos?: Photo[] }
   | { kind: "web"; planetId: string; title: string }
-  | { kind: "people"; planetId: string; title: string; people: PersonCard[] }
   | { kind: "quote"; planetId: string; text: string; who: string }
   | { kind: "statement"; planetId?: string; line: string; sub?: string; glyph?: string }
   | { kind: "end"; line: string; sub?: string; glyph?: string }
@@ -23,11 +22,12 @@ export type Slide =
 export const slides: Slide[] = [
   {
     kind: "cover",
-    title: "YES맨이 만든 인연",
+    struck: "YES맨이 만든 인연",
+    title: "같이 해볼래요?",
     subtitle: "박찬빈",
   },
 
-  // 1막. 게임 행성
+  // 1막. 게임 행성 - 아무도 안 물어봤고, 저도 안 했어요
   {
     kind: "planet",
     planetId: "game",
@@ -68,7 +68,7 @@ export const slides: Slide[] = [
     ],
   },
 
-  // 2막. 코로나 행성
+  // 2막. 코로나 행성 - 물어볼 사람도 없었어요
   {
     kind: "planet",
     planetId: "corona",
@@ -100,7 +100,7 @@ export const slides: Slide[] = [
     ],
   },
 
-  // 3막. 군대 행성
+  // 3막. 군대 행성 - 누가 저한테 물어봤어요
   {
     kind: "planet",
     planetId: "army",
@@ -123,7 +123,7 @@ export const slides: Slide[] = [
     traits: [
       "계급 낮은 사람도 안 하는 일을 혼자 다 했어요",
       "본인 일이 아닌 것도 열심히 했어요",
-      "저한테 자꾸 같이 하자고 했어요",
+      "그러면서 저한테 자꾸 물어봤어요",
     ],
   },
   {
@@ -141,12 +141,12 @@ export const slides: Slide[] = [
   {
     kind: "yeslist",
     planetId: "army",
-    title: "안 믿겼지만 따라 해봤어요",
+    title: "그 뒤로 계속 물어보더라고요",
     items: [
-      "심심하다고 데려가는 미군 훈련",
-      "주말 하와이안 셔츠 쇼핑",
-      "클럽, 주말 농구",
-      "INTEL, SUPPLY 작업",
+      "훈련 같이 갈래?",
+      "주말에 하와이안 셔츠 사러 갈래?",
+      "클럽 갈래? 농구할래?",
+      "INTEL, SUPPLY 작업 보러 갈래?",
     ],
   },
   {
@@ -197,7 +197,7 @@ export const slides: Slide[] = [
     ],
   },
 
-  // 4막. 그리디 행성
+  // 4막. 그리디 행성 - 제안이 계속 왔어요
   {
     kind: "planet",
     planetId: "greedy",
@@ -216,15 +216,26 @@ export const slides: Slide[] = [
     ],
   },
   {
+    kind: "yeslist",
+    planetId: "greedy",
+    title: "여기서도 계속 물어보더라고요",
+    items: [
+      "스터디 리드 해볼래?",
+      "운영진 해볼래?",
+      "경도 같이 할래?",
+      "올클 같이 할래?",
+      "캡스톤 같이 할래?",
+    ],
+  },
+  {
     kind: "steps",
     planetId: "greedy",
-    title: "그리디에서 맡은 자리들",
+    title: "그래서 자리가 계속 바뀌었어요",
     steps: [
       { name: "2기 멤버", desc: "스터디, 줍줍" },
       { name: "3기 스터디 리드", desc: "스터디를 이끌었어요" },
       { name: "4기 운영진", desc: "동아리 운영을 해요" },
     ],
-    note: "자리를 옮길 때마다 제안이 왔어요",
   },
   {
     kind: "sky",
@@ -296,14 +307,7 @@ export const slides: Slide[] = [
       },
       {
         label: "새 백엔드 멤버",
-        names: [
-          "김민욱",
-          "강대현",
-          "정명준",
-          "이채현",
-          "김하은",
-          "이태규",
-        ],
+        names: ["김민욱", "강대현", "정명준", "이채현", "김하은", "이태규"],
       },
     ],
     photos: [{ src: "/photos/meetup.jpg", caption: "초록 밋업" }],
@@ -344,32 +348,50 @@ export const slides: Slide[] = [
       { src: "/photos/gyeongdo-meeting.jpg", caption: "경도 팀" },
     ],
   },
-  {
-    // 군대 14명 + 그리디 42명. 중복 빼고 센 숫자라 명단이 바뀌면 같이 고쳐요.
-    kind: "web",
-    planetId: "greedy",
-    title: "예스라고 답해서 만난 사람들이에요",
-  },
-  {
-    kind: "stat",
-    planetId: "greedy",
-    kicker: "이름을 세어 보니",
-    big: "56명",
-    lines: ["정지훈 상병 말이 맞았어요"],
-  },
-  {
-    kind: "statement",
-    planetId: "greedy",
-    line: "일을 늘릴수록\n인연이 늘었어요",
-    glyph: "fox",
-  },
 
-  // 5막. 지금 행성
+  // 5막. 지금 행성 - 이제는 제가 물어봐요
   {
     kind: "planet",
     planetId: "now",
     title: "지금 행성",
     caption: "지금은 개발자 취업 준비를 하고 있어요.",
+  },
+  {
+    kind: "statement",
+    planetId: "now",
+    line: "어느 순간부터\n제가 먼저 물어보고 있었어요",
+  },
+  {
+    kind: "yeslist",
+    planetId: "now",
+    mode: "ask",
+    title: "요즘 제가 하는 말이에요",
+    items: [
+      "이거 GraphQL로 해볼까요?",
+      "동아리 홈페이지 만들어볼까요?",
+      "서울 게임 타운 나가볼까요?",
+    ],
+  },
+  {
+    kind: "content",
+    planetId: "now",
+    title: "그래서 진짜 나갔어요",
+    photo: { src: "/photos/gametown.jpg", caption: "서울 게임 타운" },
+    bullets: [
+      "경찰과 도둑을 들고 부스를 차렸어요",
+      "만든 걸 직접 써보는 사람을 보는 게 좋더라고요",
+    ],
+  },
+  {
+    kind: "content",
+    planetId: "now",
+    title: "그러다 축제 광이 됐어요",
+    photo: { src: "/photos/gyeongdo-trip.jpg", caption: "같이 간 휴가" },
+    bullets: [
+      "경도 팀에 04년생이 많아서 저도 같이 어려진 것 같아요",
+      "노는 게 좋아졌어요",
+      "김천 김밥 축제랑 청년 대로에 컨택하고 있어요",
+    ],
   },
   {
     kind: "content",
@@ -378,35 +400,38 @@ export const slides: Slide[] = [
     glyph: "compass",
     bullets: [
       "AI로 만드는 속도가 빨라졌으니까요",
-      "그래도 사람만 만들 수 있는 게 있다고 생각해요",
-      "쓰고 싶은 기술이 생기면 프로젝트에서 쓸 곳을 찾아 제안해요",
-    ],
-  },
-  {
-    kind: "content",
-    planetId: "now",
-    title: "그래서 만들고 끝내지 않아요",
-    photo: { src: "/photos/gametown.jpg", caption: "서울 게임 타운" },
-    bullets: [
-      "축제랑 박람회에 나가서 유저를 만나요",
-      "만든 걸 직접 써보는 사람을 보는 게 좋아요",
-    ],
-  },
-  {
-    kind: "content",
-    planetId: "now",
-    title: "요즘 사는 게 재밌어요",
-    photo: { src: "/photos/gyeongdo-trip.jpg", caption: "같이 간 휴가" },
-    bullets: [
-      "하는 일도 많고, 만나는 사람도 많아요",
-      "근데 일을 너무 많이 벌였어요",
+      "그래도 만드는 것보다 사람을 만나러 나가는 게 안 없어지더라고요",
+      "그건 아직 사람만 할 수 있는 것 같아요",
     ],
   },
   {
     kind: "statement",
     planetId: "now",
-    line: "그래서 이제,\n조금은 노맨이 되어 보려고요.",
+    line: "요즘은 제안을 너무 많이 해서\n일이 많아졌어요",
+    sub: "조금은 노맨이 되어 보려고요",
     glyph: "no",
+  },
+
+  // 마무리
+  {
+    // 군대 14명 + 그리디 42명. 중복 빼고 센 숫자라 명단이 바뀌면 같이 고쳐요.
+    kind: "web",
+    planetId: "greedy",
+    title: "물어보고 답하다 만난 사람들이에요",
+  },
+  {
+    kind: "stat",
+    planetId: "greedy",
+    kicker: "세어 보니",
+    big: "56명",
+    lines: ["정지훈 상병 말이 맞았어요"],
+  },
+  {
+    kind: "statement",
+    planetId: "greedy",
+    line: "저한테 먼저 물어봐 준 사람들이\n지금의 저를 만들었어요",
+    sub: "이제는 제가 물어보려고요",
+    glyph: "fox",
   },
 
   // 암전 + 스포트라이트 + 실루엣 인사

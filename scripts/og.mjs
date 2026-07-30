@@ -80,7 +80,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     <circle cx="12" cy="-14" r="5" fill="#d9b968" opacity="0.7"/>
   </g>
 
-  <text x="600" y="150" text-anchor="middle" font-family="${SERIF}" font-weight="700" font-size="82" fill="#f7d98c">YES맨이 만든 인연</text>
+  <text x="600" y="150" text-anchor="middle" font-family="${SERIF}" font-weight="700" font-size="86" fill="#f7d98c">같이 해볼래요?</text>
   <text x="600" y="206" text-anchor="middle" font-family="${SERIF}" font-size="34" fill="#f2c14e">박찬빈</text>
 
   <g fill="#7d2431">
