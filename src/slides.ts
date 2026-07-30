@@ -135,7 +135,7 @@ export const slides: Slide[] = [
   {
     kind: "quote",
     planetId: "army",
-    text: "“누가 같이 하자고 할 때, 노라고 하는 사람보다 예스라고 하는 사람한테 기회가 와. 일이 늘어날수록 그 안에서 인연이 생기고.”",
+    text: "“누가 같이 하자고 할 때, NO라고 하는 사람보다 YES라고 하는 사람한테 기회가 와. 일이 늘어날수록 그 안에서 인연이 생기고.”",
     who: "정지훈 상병의 대답이었어요",
   },
   {
@@ -409,7 +409,7 @@ export const slides: Slide[] = [
     kind: "statement",
     planetId: "now",
     line: "요즘은 제안을 너무 많이 해서\n일이 많아졌어요",
-    sub: "조금은 노맨이 되어 보려고요",
+    sub: "조금은 NO맨이 되어 보려고요",
     glyph: "no",
   },
 
