@@ -1,11 +1,12 @@
 import { motion } from "motion/react";
 
-// 마무리 별자리. 밤하늘에 그려 넣은 성좌처럼, 가운데 별에서 무리로 빛줄기가 뻗고
-// 무리마다 사람들이 별로 이어져요. 이름은 중복 없이 한 번씩만 나와요.
+// 마무리 별자리.
+// 왼쪽은 언제 만났는지(군대, 그리디 기수별), 오른쪽은 뭘 같이 했는지(프로젝트별)예요.
+// 같은 사람이 양쪽에 나오기도 해요. 여러 번 같이 했다는 뜻이에요.
 
-const CENTER = { x: 540, y: 332 };
-const COL_W = 112;
-const ROW_H = 39;
+const CENTER = { x: 700, y: 450 };
+const COL_W = 110;
+const ROW_H = 38;
 
 type Cluster = {
   label: string;
@@ -16,10 +17,11 @@ type Cluster = {
 };
 
 const CLUSTERS: Cluster[] = [
+  // 왼쪽 - 언제 만났나
   {
     label: "군대",
-    hub: { x: 424, y: 116 },
-    origin: { x: 44, y: 48 },
+    hub: { x: 420, y: 116 },
+    origin: { x: 40, y: 46 },
     cols: 3,
     names: [
       "정지훈",
@@ -40,8 +42,8 @@ const CLUSTERS: Cluster[] = [
   },
   {
     label: "그리디 2기",
-    hub: { x: 424, y: 492 },
-    origin: { x: 44, y: 392 },
+    hub: { x: 420, y: 425 },
+    origin: { x: 40, y: 330 },
     cols: 3,
     names: [
       "이승용",
@@ -65,10 +67,28 @@ const CLUSTERS: Cluster[] = [
     ],
   },
   {
+    label: "그리디 3기",
+    hub: { x: 332, y: 700 },
+    origin: { x: 40, y: 646 },
+    cols: 2,
+    names: [
+      "신혜빈",
+      "정상희",
+      "남해윤",
+      "안금서",
+      "심혁",
+      "윤재홍",
+      "강건",
+      "강예령",
+    ],
+  },
+
+  // 오른쪽 - 뭘 같이 했나
+  {
     label: "그리디 4기",
-    hub: { x: 656, y: 122 },
-    origin: { x: 762, y: 66 },
-    cols: 3,
+    hub: { x: 1058, y: 132 },
+    origin: { x: 1150, y: 46 },
+    cols: 2,
     names: [
       "김민기",
       "이진",
@@ -85,27 +105,41 @@ const CLUSTERS: Cluster[] = [
     ],
   },
   {
-    label: "그리디 3기",
-    hub: { x: 656, y: 458 },
-    origin: { x: 762, y: 402 },
+    label: "줍줍",
+    hub: { x: 1058, y: 378 },
+    origin: { x: 1150, y: 340 },
+    cols: 2,
+    names: ["전서희", "황혜림", "강동현", "임규영", "이창희"],
+  },
+  {
+    label: "경찰과 도둑",
+    hub: { x: 1058, y: 558 },
+    origin: { x: 1150, y: 520 },
+    cols: 2,
+    names: ["정상희", "이창희", "황혜림", "홍의민", "김다임", "윤지희"],
+  },
+  {
+    label: "올클",
+    hub: { x: 1058, y: 746 },
+    origin: { x: 1150, y: 690 },
     cols: 2,
     names: [
-      "신혜빈",
-      "정상희",
+      "김주환",
+      "채현우",
+      "김수민",
       "남해윤",
+      "송혜정",
       "안금서",
-      "심혁",
-      "윤재홍",
-      "강건",
-      "강예령",
+      "이진",
+      "하수한",
     ],
   },
   {
-    label: "프로젝트",
-    hub: { x: 448, y: 608 },
-    origin: { x: 556, y: 612 },
-    cols: 4,
-    names: ["채현우", "김다임", "윤지희", "하수한"],
+    label: "캡스톤",
+    hub: { x: 626, y: 832 },
+    origin: { x: 712, y: 832 },
+    cols: 2,
+    names: ["안금서", "신지우"],
   },
 ];
 
@@ -117,8 +151,8 @@ function jitter(seed: number, amp: number) {
 function pos(c: Cluster, i: number, ci: number) {
   const seed = ci * 31 + i * 7 + 1;
   return {
-    x: c.origin.x + (i % c.cols) * COL_W + jitter(seed, 9),
-    y: c.origin.y + Math.floor(i / c.cols) * ROW_H + jitter(seed + 3, 7),
+    x: c.origin.x + (i % c.cols) * COL_W + jitter(seed, 7),
+    y: c.origin.y + Math.floor(i / c.cols) * ROW_H + jitter(seed + 3, 6),
   };
 }
 
@@ -154,7 +188,7 @@ function Ray({
       strokeLinecap="round"
       initial={{ pathLength: 0, opacity: 0 }}
       animate={{ pathLength: 1, opacity }}
-      transition={{ duration: 0.7, delay, ease: "easeOut" }}
+      transition={{ duration: 0.6, delay, ease: "easeOut" }}
     />
   );
 }
@@ -191,7 +225,7 @@ function Twinkle({
 
 export default function Constellation() {
   return (
-    <svg className="constellation" viewBox="0 0 1080 680" aria-hidden>
+    <svg className="constellation" viewBox="0 0 1400 890" aria-hidden>
       <defs>
         <radialGradient id="halo">
           <stop offset="0" stopColor="#f7d98c" stopOpacity="0.5" />
@@ -206,12 +240,12 @@ export default function Constellation() {
       </defs>
 
       {CLUSTERS.map((c, ci) => {
-        const hubDelay = 0.5 + ci * 0.2;
-        const nameStart = hubDelay + 0.5;
+        const hubDelay = 0.45 + ci * 0.16;
+        const nameStart = hubDelay + 0.4;
         return (
           <g key={`ray-${c.label}`}>
             <Ray
-              d={curve(CENTER.x, CENTER.y, c.hub.x, c.hub.y, ci % 2 ? 26 : -26)}
+              d={curve(CENTER.x, CENTER.y, c.hub.x, c.hub.y, ci % 2 ? 24 : -24)}
               delay={hubDelay}
               width={1.8}
               opacity={0.5}
@@ -220,17 +254,17 @@ export default function Constellation() {
               const p = pos(c, i, ci);
               return (
                 <Ray
-                  key={n}
+                  key={`${n}-${i}`}
                   d={curve(
                     c.hub.x,
                     c.hub.y,
                     p.x,
                     p.y,
-                    (i % 2 ? 1 : -1) * (10 + (i % 3) * 6),
+                    (i % 2 ? 1 : -1) * (9 + (i % 3) * 5),
                   )}
-                  delay={nameStart + i * 0.04}
+                  delay={nameStart + i * 0.03}
                   width={1}
-                  opacity={0.28}
+                  opacity={0.26}
                 />
               );
             })}
@@ -239,48 +273,48 @@ export default function Constellation() {
       })}
 
       {CLUSTERS.map((c, ci) => {
-        const hubDelay = 0.5 + ci * 0.2;
-        const nameStart = hubDelay + 0.55;
+        const hubDelay = 0.45 + ci * 0.16;
+        const nameStart = hubDelay + 0.45;
         return (
           <g key={`star-${c.label}`}>
             <Twinkle
               x={c.hub.x}
               y={c.hub.y}
-              r={9}
-              halo={30}
-              delay={hubDelay + 0.15}
+              r={10}
+              halo={34}
+              delay={hubDelay + 0.12}
             />
             <motion.text
               x={c.hub.x}
-              y={c.hub.y + 34}
+              y={c.hub.y + 38}
               textAnchor="middle"
               fontFamily="'Gowun Batang', serif"
               fontWeight="700"
-              fontSize="21"
+              fontSize="24"
               letterSpacing="2"
               fill="#f7d98c"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: hubDelay + 0.3 }}
+              transition={{ duration: 0.6, delay: hubDelay + 0.25 }}
             >
               {c.label}
             </motion.text>
 
             {c.names.map((n, i) => {
               const p = pos(c, i, ci);
-              const delay = nameStart + i * 0.04;
+              const delay = nameStart + i * 0.03;
               return (
-                <g key={n}>
-                  <Twinkle x={p.x} y={p.y} r={5.5} halo={17} delay={delay} />
+                <g key={`${n}-${i}`}>
+                  <Twinkle x={p.x} y={p.y} r={5} halo={15} delay={delay} />
                   <motion.text
-                    x={p.x + 15}
+                    x={p.x + 14}
                     y={p.y + 6}
                     fontFamily="'Nanum Pen Script', cursive"
-                    fontSize="21"
+                    fontSize="19"
                     fill="#efe6d2"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.92 }}
-                    transition={{ duration: 0.6, delay: delay + 0.1 }}
+                    transition={{ duration: 0.5, delay: delay + 0.08 }}
                   >
                     {n}
                   </motion.text>
@@ -294,21 +328,21 @@ export default function Constellation() {
       <motion.g
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: "spring", stiffness: 200, damping: 17, delay: 0.25 }}
+        transition={{ type: "spring", stiffness: 200, damping: 17, delay: 0.2 }}
         style={{ transformOrigin: `${CENTER.x}px ${CENTER.y}px` }}
       >
-        <circle cx={CENTER.x} cy={CENTER.y} r="60" fill="url(#coreHalo)" />
+        <circle cx={CENTER.x} cy={CENTER.y} r="62" fill="url(#coreHalo)" />
         <path
-          d={`M${CENTER.x},${CENTER.y - 22} L${CENTER.x + 6.6},${CENTER.y - 6.6} L${CENTER.x + 22},${CENTER.y} L${CENTER.x + 6.6},${CENTER.y + 6.6} L${CENTER.x},${CENTER.y + 22} L${CENTER.x - 6.6},${CENTER.y + 6.6} L${CENTER.x - 22},${CENTER.y} L${CENTER.x - 6.6},${CENTER.y - 6.6} Z`}
+          d={`M${CENTER.x},${CENTER.y - 23} L${CENTER.x + 7},${CENTER.y - 7} L${CENTER.x + 23},${CENTER.y} L${CENTER.x + 7},${CENTER.y + 7} L${CENTER.x},${CENTER.y + 23} L${CENTER.x - 7},${CENTER.y + 7} L${CENTER.x - 23},${CENTER.y} L${CENTER.x - 7},${CENTER.y - 7} Z`}
           fill="#fff6da"
         />
         <text
           x={CENTER.x}
-          y={CENTER.y + 48}
+          y={CENTER.y + 50}
           textAnchor="middle"
           fontFamily="'Gowun Batang', serif"
           fontWeight="700"
-          fontSize="23"
+          fontSize="24"
           fill="#fff6da"
         >
           나

@@ -566,7 +566,7 @@ body {
 }
 
 .slide-frame:has(.constellation) {
-  width: min(1120px, 97vw);
+  width: min(1440px, 99vw);
 }
 
 .slide-grid {
@@ -852,9 +852,9 @@ body {
 }
 
 .constellation {
-  width: min(1080px, 96vw);
+  width: min(1400px, 98vw);
   height: auto;
-  max-height: 68vh;
+  max-height: 74vh;
 }
 
 /* 폴라로이드 사진 */

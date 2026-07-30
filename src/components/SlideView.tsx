@@ -335,7 +335,7 @@ function Content({ slide }: { slide: Slide }) {
                       ease: "easeIn",
                     }}
                   >
-                    네!
+                    YES!
                   </motion.span>
                 )}
               </div>
