@@ -91,7 +91,7 @@ export const slides: Slide[] = [
     title: "대학 1, 2학년은 학교를 안 갔어요",
     tiles: [
       { big: "부산", small: "3주에 한 번" },
-      { big: "일본", small: "여행" },
+      { big: "해외여행", small: "충동적으로" },
       { big: "게임", small: "친구들이랑" },
     ],
     notes: [
