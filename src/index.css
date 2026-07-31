@@ -973,16 +973,56 @@ body {
 /* 인용, 핵심 문장 */
 
 .quote-card {
-  padding: 52px 64px;
+  position: relative;
+  max-width: min(920px, 92vw);
+  padding: 58px 72px 48px;
+  border-top: 6px solid var(--gold);
+}
+
+.quote-card::before {
+  content: "\201C";
+  position: absolute;
+  top: 4px;
+  left: 26px;
+  font-family: var(--font-title);
+  font-size: 96px;
+  line-height: 1;
+  color: rgba(242, 193, 78, 0.55);
+  pointer-events: none;
 }
 
 .quote-text {
+  position: relative;
   font-family: var(--font-title);
   font-weight: 700;
-  font-size: clamp(30px, 4.4vw, 50px);
-  line-height: 1.5;
+  font-size: clamp(30px, 4.1vw, 46px);
+  line-height: 1.62;
+  color: #2f2820;
   margin: 0;
-  text-wrap: balance;
+}
+
+.tone-no,
+.tone-yes {
+  font-style: normal;
+  padding: 0 2px;
+}
+
+.tone-no {
+  color: #b23122;
+}
+
+.tone-yes {
+  color: #16775c;
+  border-bottom: 5px solid rgba(31, 138, 107, 0.28);
+}
+
+.quote-tail {
+  font-size: clamp(19px, 2.1vw, 25px);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 26px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(69, 58, 44, 0.18);
 }
 
 .quote-who {

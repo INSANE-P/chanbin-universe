@@ -57,6 +57,27 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.75, delay, ease: "easeOut" as const },
 });
 
+// 인용문에서 NO와 YES만 색으로 갈라 보여줘요.
+function withTone(line: string) {
+  return line.split(/(NO|YES)/).map((seg, i) => {
+    if (seg === "NO") {
+      return (
+        <em key={i} className="tone-no">
+          NO
+        </em>
+      );
+    }
+    if (seg === "YES") {
+      return (
+        <em key={i} className="tone-yes">
+          YES
+        </em>
+      );
+    }
+    return <span key={i}>{seg}</span>;
+  });
+}
+
 function Header({ planetId }: { planetId: string }) {
   const p = planetById(planetId);
   return (
@@ -419,7 +440,15 @@ function Content({ slide }: { slide: Slide }) {
           <div className="quote-wrap">
             <HangingProp spread={300} delay={0.5} swayDur={7.5}>
               <div className="paper-card quote-card">
-                <p className="quote-text">{slide.text}</p>
+                <p className="quote-text">
+                  {slide.text.split("\n").map((line, li, arr) => (
+                    <span key={li}>
+                      {withTone(line)}
+                      {li < arr.length - 1 && <br />}
+                    </span>
+                  ))}
+                </p>
+                {slide.tail && <p className="quote-tail">{slide.tail}</p>}
               </div>
             </HangingProp>
           </div>

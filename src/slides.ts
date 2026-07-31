@@ -14,7 +14,7 @@ export type Slide =
   | { kind: "steps"; planetId: string; title: string; steps: { name: string; desc: string }[]; note?: string }
   | { kind: "sky"; planetId: string; title: string; groups: { label: string; names: string[] }[]; photos?: Photo[] }
   | { kind: "web"; planetId: string; title: string }
-  | { kind: "quote"; planetId: string; text: string; who: string }
+  | { kind: "quote"; planetId: string; text: string; tail?: string; who: string }
   | { kind: "propose"; text: string; sub?: string }
   | { kind: "statement"; planetId?: string; line: string; sub?: string; glyph?: string }
   | { kind: "end"; line: string; sub?: string; glyph?: string }
@@ -136,7 +136,9 @@ export const slides: Slide[] = [
   {
     kind: "quote",
     planetId: "army",
-    text: "“누가 같이 하자고 할 때, NO라고 하는 사람보다 YES라고 하는 사람한테 기회가 와. 일이 늘어날수록 그 안에서 인연이 생기고.”",
+    // NO와 YES는 화면에서 색으로 강조돼요.
+    text: "누가 같이 하자고 할 때,\nNO라고 하는 사람보다\nYES라고 하는 사람한테 기회가 와.",
+    tail: "일이 늘어날수록 그 안에서 인연이 생기고.",
     who: "정지훈 상병의 대답이었어요",
   },
   {
