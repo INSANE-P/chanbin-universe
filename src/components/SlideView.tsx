@@ -533,9 +533,38 @@ function Content({ slide }: { slide: Slide }) {
         </div>
       );
 
-    case "statement":
+    case "statement": {
+      // 지워지는 말이 있으면 그게 먼저 뜨고 그어진 뒤에 본문이 나와요.
+      const lineDelay = slide.struck ? 1.9 : 0.8;
       return (
         <div className="scene-center">
+          {slide.struck && (
+            <motion.div
+              className="struck-wrap struck-big"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 0.6, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+            >
+              <span className="struck-title">{slide.struck}</span>
+              <svg
+                className="strike"
+                viewBox="0 0 100 14"
+                preserveAspectRatio="none"
+                aria-hidden
+              >
+                <motion.path
+                  d="M1,9 Q26,4 50,8 T99,6"
+                  fill="none"
+                  stroke="#d1495b"
+                  strokeWidth="2.6"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.45, delay: 1.1, ease: "easeIn" }}
+                />
+              </svg>
+            </motion.div>
+          )}
           {slide.glyph && (
             <div className="mark-glyph">
               <HangingProp
@@ -548,7 +577,7 @@ function Content({ slide }: { slide: Slide }) {
               </HangingProp>
             </div>
           )}
-          <motion.h2 className="statement-line" {...fadeUp(0.8)}>
+          <motion.h2 className="statement-line" {...fadeUp(lineDelay)}>
             {slide.line.split("\n").map((l, i, arr) => (
               <span key={i}>
                 {l}
@@ -557,12 +586,13 @@ function Content({ slide }: { slide: Slide }) {
             ))}
           </motion.h2>
           {slide.sub && (
-            <motion.p className="slide-caption pen" {...fadeUp(1.7)}>
+            <motion.p className="slide-caption pen" {...fadeUp(lineDelay + 0.9)}>
               {slide.sub}
             </motion.p>
           )}
         </div>
       );
+    }
   }
 }
 

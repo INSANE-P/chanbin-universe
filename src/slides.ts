@@ -16,7 +16,7 @@ export type Slide =
   | { kind: "web"; planetId: string; title: string }
   | { kind: "quote"; planetId: string; text: string; tail?: string; who: string }
   | { kind: "propose"; text: string; sub?: string }
-  | { kind: "statement"; planetId?: string; line: string; sub?: string; glyph?: string }
+  | { kind: "statement"; planetId?: string; line: string; sub?: string; glyph?: string; struck?: string }
   | { kind: "end"; line: string; sub?: string; glyph?: string }
   | { kind: "fin" };
 
@@ -168,6 +168,13 @@ export const slides: Slide[] = [
     line: "마지막 훈련에서\nACOM을 받았어요",
     sub: "미 육군 표창이에요",
     glyph: "medal",
+  },
+  {
+    kind: "statement",
+    planetId: "army",
+    struck: "ACOM",
+    line: "그런데 상이\n중요한 게 아니었어요",
+    sub: "진짜 남은 건 따로 있어요",
   },
   {
     kind: "sky",

@@ -147,6 +147,25 @@ body {
   white-space: nowrap;
 }
 
+.struck-big {
+  margin-bottom: 26px;
+}
+
+.struck-big .struck-title {
+  font-size: clamp(38px, 6vw, 68px);
+  color: var(--gold-soft);
+  letter-spacing: 0.04em;
+}
+
+.struck-big .strike {
+  height: 20px;
+  margin-top: -10px;
+}
+
+.struck-big .strike path {
+  stroke-width: 3.4;
+}
+
 .strike {
   position: absolute;
   left: -4px;
