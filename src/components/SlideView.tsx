@@ -485,6 +485,25 @@ function Content({ slide }: { slide: Slide }) {
         </>
       );
 
+    case "propose":
+      return (
+        <div className="scene-center">
+          <motion.div
+            className="paper-card propose-bubble"
+            initial={{ opacity: 0, scale: 0.3 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", stiffness: 150, damping: 13, delay: 0.5 }}
+          >
+            <p className="propose-text">{slide.text}</p>
+          </motion.div>
+          {slide.sub && (
+            <motion.p className="propose-sub pen" {...fadeUp(1.5)}>
+              {slide.sub}
+            </motion.p>
+          )}
+        </div>
+      );
+
     case "statement":
       return (
         <div className="scene-center">

@@ -15,6 +15,7 @@ export type Slide =
   | { kind: "sky"; planetId: string; title: string; groups: { label: string; names: string[] }[]; photos?: Photo[] }
   | { kind: "web"; planetId: string; title: string }
   | { kind: "quote"; planetId: string; text: string; who: string }
+  | { kind: "propose"; text: string; sub?: string }
   | { kind: "statement"; planetId?: string; line: string; sub?: string; glyph?: string }
   | { kind: "end"; line: string; sub?: string; glyph?: string }
   | { kind: "fin" };
@@ -437,6 +438,11 @@ export const slides: Slide[] = [
     line: "저한테 먼저 물어봐 준 사람들이\n지금의 저를 만들었어요",
     sub: "이제는 제가 물어보려고요",
     glyph: "fox",
+  },
+  {
+    kind: "propose",
+    text: "오늘 회식 가실래요?",
+    sub: "진심이에요",
   },
 
   // 암전 + 스포트라이트 + 실루엣 인사
