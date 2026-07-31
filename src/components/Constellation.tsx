@@ -136,10 +136,17 @@ const CLUSTERS: Cluster[] = [
   },
   {
     label: "캡스톤",
-    hub: { x: 626, y: 832 },
-    origin: { x: 712, y: 832 },
+    hub: { x: 450, y: 832 },
+    origin: { x: 536, y: 814 },
     cols: 2,
-    names: ["안금서", "신지우"],
+    names: ["안금서", "신지우", "정재연", "지예람"],
+  },
+  {
+    label: "홈페이지",
+    hub: { x: 872, y: 832 },
+    origin: { x: 958, y: 814 },
+    cols: 2,
+    names: ["신혜빈", "이진", "윤재홍"],
   },
 ];
 
@@ -225,7 +232,7 @@ function Twinkle({
 
 export default function Constellation() {
   return (
-    <svg className="constellation" viewBox="0 0 1400 890" aria-hidden>
+    <svg className="constellation" viewBox="0 0 1400 910" aria-hidden>
       <defs>
         <radialGradient id="halo">
           <stop offset="0" stopColor="#f7d98c" stopOpacity="0.5" />

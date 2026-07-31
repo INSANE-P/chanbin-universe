@@ -341,7 +341,11 @@ export const slides: Slide[] = [
       },
       {
         label: "캡스톤",
-        names: ["안금서", "신지우"],
+        names: ["안금서", "신지우", "정재연", "지예람"],
+      },
+      {
+        label: "홈페이지",
+        names: ["신혜빈", "이진", "윤재홍"],
       },
     ],
     photos: [
@@ -415,7 +419,7 @@ export const slides: Slide[] = [
 
   // 마무리
   {
-    // 군대 14명 + 그리디 42명. 중복 빼고 센 숫자라 명단이 바뀌면 같이 고쳐요.
+    // 군대 14명 + 그리디 44명. 중복 빼고 센 숫자라 명단이 바뀌면 같이 고쳐요.
     kind: "web",
     planetId: "greedy",
     title: "물어보고 답하다 만난 사람들이에요",
@@ -424,7 +428,7 @@ export const slides: Slide[] = [
     kind: "stat",
     planetId: "greedy",
     kicker: "세어 보니",
-    big: "56명",
+    big: "58명",
     lines: ["정지훈 상병 말이 맞았어요"],
   },
   {
