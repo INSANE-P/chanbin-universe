@@ -155,7 +155,7 @@ export const slides: Slide[] = [
     kicker: "18개월 동안",
     big: "훈련 6번",
     lines: [
-      "FS, UFS, CHD, 포병 훈련, JDOCS",
+      "FS, UFS, FTX, 포병 훈련, JDOCS",
       "통역병인데 화력과 일도 저한테 물어봤어요",
     ],
   },
